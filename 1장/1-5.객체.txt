@@ -1,0 +1,387 @@
+객체는 변수혹은 상수를 사용하게 될때 하나의 이름에 여러 종류의 값을 넣을 수 있게 해줌
+ex)
+const dog = {
+	name: '멍멍이';
+	age: 2
+};
+
+console.log(dog.name);
+console.log(dog.age);
+
+결과는 
+멍멍이
+2
+
+객체를 선언 할때에는 { }문자 안에 원하는 값들을 넣어주면 됨
+값을 넣을 때에는 | 키: 원하는 값 |의 형태로 넣으면, 키에 해당하는 부분을 공백이 없어야 함
+만약 공백이 있어야하는 상황이면 따옴표로 감싸서 문자열로 넣어주면 됨
+ex)
+const sample = {
+	'key with space': true
+}; 
+
+-함수에서 객체를 파라미터로 받기-
+ex)
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+function print(hero) {
+  const text = `${hero.alias}(${hero.name}) 역할을 맡은 배우는 ${
+    hero.actor
+  } 입니다.`;
+  console.log(text);
+}
+
+print(ironMan);
+print(captainAmerica);
+
+결과물
+아이언맨(토니 스타크) 역할을 맡은 배우는 로버트 다우니 주니어 입니다.
+캡틴 아메리카(스티븐 로저스) 역할을 맡은 배우는 크리스 에반스 입니다.
+
+줄이 너무 길어지는 것을 방지하기 위하여 ${hero.actor}가 사용되는 부분에서 새 줄이 입력되었음
+이는 없어도 무방함, 코드 샌드박스에서 저장시 자동으로 새 줄을 입력하게 됨
+
+-객체 비구조화 할당-
+print함수를 보면 파라미터로 받아온 hero내부의 값을 조회할 때 마다 hero. 를 입력하고 있는데, 객체 비구조화 할당이라는 문법을 사용하면 코드를 짧고 보기 좋게 작성이 가능
+
+ex)
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+function print(hero) {
+  const { alias, name, actor } = hero;
+  const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다.`;
+  console.log(text);
+}
+
+print(ironMan);
+print(captainAmerica);
+
+같은 결과가 나옴
+
+객체에서 값들을 추출해서 새로운 상수로 선언해주는 것
+파라미터 단계에서 객체 비구조화 할당을 할 수도 있음
+
+ex)
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+function print(hero) {
+  const { alias, name, actor } = hero;
+  const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다.`;
+  console.log(text);
+}
+
+print(ironMan);
+print(captainAmerica);
+
+이 코드 또한 같은 결과가 나옴
+
+-객체 안에 함수 넣기-
+객체 안에 함수를 넣을 수도 있음
+ex)
+const dog = {
+  name: '멍멍이',
+  sound: '멍멍!',
+  say: function say() {
+    console.log(this.sound);
+  }
+};
+
+dog.say();
+
+결과
+멍멍!
+
+함수가 객체안에 들어가게 되면, this는 자신이 속해있는 객체를 가르키게 됨
+함수를 선언 할 때에는 이름이 없어도 됨
+
+ex)
+
+Type to search
+벨로퍼트와 함께하는 모던 자바스크립트
+1장. 자바스크립트 입문
+01. Hello JavaScript
+02. 변수
+03. 연산자
+04. 조건문
+05. 함수
+06. 객체
+07. 배열
+08. 반복문
+09. 배열 내장함수
+10. 프로토타입과 클래스
+2장. 알고있으면 유용한 자바스크립트 문법
+01. 삼항 연산자
+02. Truthy and Falsy
+03. 단축 평가 논리 계산법
+04. 함수의 기본 파라미터
+05. 조건문 더 스마트하게 쓰기
+06. 비구조화 할당 (구조 분해) 문법
+07. spread 와 rest 문법
+08. scope 의 이해
+3장. 자바스크립트에서 비동기 처리 다루기
+01. Promise
+02. async/await
+4장. HTML 과 JavaScript 연동하기
+01. 카운터
+02. 모달
+마무리
+참고 문헌
+ 수정 요청하기
+06. 객체
+객체는 우리가 변수 혹은 상수를 사용하게 될 때 하나의 이름에 여러 종류의 값을 넣을 수 있게 해줍니다.
+
+const dog = {
+  name: '멍멍이',
+  age: 2
+};
+
+console.log(dog.name);
+console.log(dog.age);
+결과물은 다음과 같습니다.
+
+멍멍이
+2
+객체를 선언 할 때에는 이렇게 { } 문자 안에 원하는 값들을 넣어주면 됩니다. 값을 집어 넣을 때에는
+
+키: 원하는 값
+형태로 넣으며, 키에 해당하는 부분은 공백이 없어야합니다. 만약에 공백이 있어야 하는 상황이라면 이를 따옴표로 감싸서 문자열로 넣어주면 됩니다.
+
+const sample = {
+  'key with space': true
+};
+한번 영화 어벤져스의 캐릭터 아이언맨과 캡틴 아메리카의 정보를 객체안에 집어넣어봅시다.
+
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+console.log(ironMan);
+console.log(captainAmerica);
+
+
+결과물이 잘 출력 됐나요?
+
+함수에서 객체를 파라미터로 받기
+함수를 새로 만들어서 방금 만든 객체를 파라미터로 받아와서 사용해봅시다.
+
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+function print(hero) {
+  const text = `${hero.alias}(${hero.name}) 역할을 맡은 배우는 ${
+    hero.actor
+  } 입니다.`;
+  console.log(text);
+}
+
+print(ironMan);
+print(captainAmerica);
+결과물이 다음과 같이 나타나나요?
+
+아이언맨(토니 스타크) 역할을 맡은 배우는 로버트 다우니 주니어 입니다.
+캡틴 아메리카(스티븐 로저스) 역할을 맡은 배우는 크리스 에반스 입니다.
+위 코드에서는 줄이 너무 길어지는것을 방지하기 위하여 ${hero.actor} 가 사용되는 부분에서 새 줄이 입력되었습니다. 이는 없어도 무방합니다만, 코드 샌드박스에서 저장시 자동으로 새 줄을 입력하게 됩니다. 이러한 기능을 방지하고 싶다면, 코드샌드박스 좌측의 설정 아이콘을 누르고 .prettierrc 를 열어서 PrintWidth 를 120 정도로 늘리시면 됩니다.
+
+객체 비구조화 할당
+print 함수를 보시면 파라미터로 받아온 hero 내부의 값을 조회 할 때 마다 hero. 를 입력하고 있는데, 객체 비구조화 할당이라는 문법을 사용하면 코드를 더욱 짧고 보기 좋게 작성 할 수 있습니다.
+
+이 문법은 "객체 구조 분해" 라고 불리기도 합니다.
+
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+function print(hero) {
+  const { alias, name, actor } = hero;
+  const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다.`;
+  console.log(text);
+}
+
+print(ironMan);
+print(captainAmerica);
+똑같은 결과가 나타났나요?
+
+const { alias, name, actor } = hero;
+이 코드가 객체에서 값들을 추출해서 새로운 상수로 선언해 주는 것 입니다.
+
+여기서 더 나아가면, 파라미터 단계에서 객체 비구조화 할당을 할 수도 있습니다.
+
+const ironMan = {
+  name: '토니 스타크',
+  actor: '로버트 다우니 주니어',
+  alias: '아이언맨'
+};
+
+const captainAmerica = {
+  name: '스티븐 로저스',
+  actor: '크리스 에반스',
+  alias: '캡틴 아메리카'
+};
+
+function print({ alias, name, actor }) {
+  const text = `${alias}(${name}) 역할을 맡은 배우는 ${actor} 입니다.`;
+  console.log(text);
+}
+
+print(ironMan);
+print(captainAmerica);
+어떤가요? 코드가 처음보다 훨씬 깔끔해졌지요?
+
+객체 안에 함수 넣기
+객체 안에 함수를 넣을 수도 있습니다. 한번 다음 코드를 실행해보세요.
+
+const dog = {
+  name: '멍멍이',
+  sound: '멍멍!',
+  say: function say() {
+    console.log(this.sound);
+  }
+};
+
+dog.say();
+결과는 다음과 같습니다.
+
+멍멍!
+함수가 객체안에 들어가게 되면, this 는 자신이 속해있는 객체를 가르키게 됩니다.
+
+함수를 선언 할 때에는 이름이 없어도 됩니다.
+
+const dog = {
+  name: '멍멍이',
+  sound: '멍멍!',
+  say: function() {
+    console.log(this.sound);
+  }
+};
+
+dog.say();
+이 코드 또한 똑같이 작동함
+객체 안에 함수를 넣을 때, 함살표 함수로 선언한다면 제대로 작동하지 않음
+
+이유는 function으로 선언한 함수는 this가 제대로 자신이 속한 객체를 가르키게 되는데, 화살표 함수는 그렇지 않기 때문임
+
+-Getter함수와 Setter함수-
+객체를 만들고 나면, 객체안의 값을 수정 할 수도 있음
+ex)
+const numbers = {
+	a: 1, 
+	b: 2
+};
+
+numbers.a = 5;
+console.log(numbers);
+
+Getter함수와 Setter함수를 사용하게 되면 특정 값을 바꾸려고 하거나, 특정 값을 조회하려고 할 때 원하는 코드를 실행 시킬수 있음
+ex)
+const numbers = {
+  a: 1,
+  b: 2,
+  get sum() {
+    console.log('sum 함수가 실행됩니다!');
+    return this.a + this.b;
+  }
+};
+
+console.log(numbers.sum);
+numbers.b = 5;
+console.log(numbers.sum);
+
+numbes.sum()을 한 것이 아니라 number.sum을 조회했을 뿐인데, 함수가 실행되고 그 결과값이 출력됨
+Getter함수는 특정 값을 조회할 때 우리가 설정한 함수로 연산된 값을 반환함
+
+Setter ex)
+const numbers = {
+  _a: 1,
+  _b: 2,
+  sum: 3,
+  calculate() {
+    console.log('calculate');
+    this.sum = this._a + this._b;
+  },
+  get a() {
+    return this._a;
+  },
+  get b() {
+    return this._b;
+  },
+  set a(value) {
+    console.log('a가 바뀝니다.');
+    this._a = value;
+    this.calculate();
+  },
+  set b(value) {
+    console.log('b가 바뀝니다.');
+    this._b = value;
+    this.calculate();
+  }
+};
+
+console.log(numbers.sum);
+numbers.a = 5;
+numbers.b = 7;
+numbers.a = 9;
+console.log(numbers.sum);
+console.log(numbers.sum);
+console.log(numbers.sum);
+
+Setter함수를 설정할 때에는 함수의 앞부분에 set키워드를 붙임
+Setter함수를 설정하고 나면, numbers.a = 5 이렇게 값을 설정했을 때 5를 함수의 파라미터로 받아오게 됨
+객체 안에 _a,_b라는 숫자를 선언해주고, 이 값들을 위한 Getter와 Setter함수를 설정해주었음
+
+전에 객체에서는 numbers.sum이 조회 될 때마다 덧셈이 이루어졌었지만, a혹은 b값이 바뀔 때 마다 sum값을 연산함
+
