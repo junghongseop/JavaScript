@@ -1,0 +1,70 @@
+-if문-
+if문은 "~하다면 ~를 해라"를 의미
+
+if문을 사용하면 특정 조건이 만족 될 때에만 특정 코드를 실행 시킬 수 있음
+
+if (조건) {
+  코드;
+}
+
+조건이 만족됐을 대 실행시킬 코드가 { }로 감싸져 있음, 이를 코드블록이라고 함
+
+만약에 조건이 true가 된다면 지정한 코드가 실행됨, false가 된다면 코드가 실행되지 않음
+
+ex)
+const a = 1;
+if (true) {
+  const a = 2;
+  console.log('if문 안의 a 값은 ' + a);
+}
+console.log('if문 밖의 a 값은 ' + a);
+
+결과
+"if문의 안의 a 값은 2"
+"if문 밖의 a 값은 1"
+
+if문에 조건을 true로 설정했기 때문에 코드 블록 내부의 코드가 무조건 실행됨
+
+-if-else if문-
+if-else if 문은 여러 조건에 따라 다른 작업을 해야 할 때 사용
+
+ex)
+const a = 10;
+if (a === 5) {
+  console.log('5입니다!');
+} else if (a === 10) {
+  console.log('10입니다!');
+} else {
+  console.log('5도 아니고 10도 아닙니다.');
+}
+
+결과
+10입니다!
+
+-switch/case문-
+switch/case 문은 특정 값이 무엇이냐에 따라 다른 작업을 하고 싶을 때 사용
+
+ex)
+const device = 'iphone';
+
+switch (device) {
+  case 'iphone':
+    console.log('아이폰!');
+    break;
+  case 'ipad':
+    console.log('아이패드!');
+    break;
+  case 'galaxy note':
+    console.log('갤럭시 노트!');
+    break;
+  default:
+    console.log('모르겠네요..');
+}
+결과
+아이폰!
+
+switch/case 문은 이와 같이 특정 값이 무엇이냐에 따라 다른 작업을 수행 할 수 있게 해줌
+switch/case 문에서는 각 case 에서 실행할 코드를 작성하고 맨 마지막에 break; 를 해주어야 함
+
+default: 는 device 값이 우리가 case 로 준비하지 않은 값일 경우를 의미
+
