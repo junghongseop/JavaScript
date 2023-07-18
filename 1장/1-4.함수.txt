@@ -58,3 +58,230 @@ const add = (a, b) => a+b;
 console.log(add(1, 2));
 
 화살표 함수와 일반 funtion으로 만든 함수와의 주요 차이점은 화살표 함수에서 가르키는 this와 function에서 가르키는 this가 서로 다르다는 것
+
+-콜백함수-
+콜백함수란 파라미터로 함수를 전달받앙, 함수 내부에서 실행하는 함수
+
+ex)
+let number = [1, 2, 3, 4, 5];
+
+number.forEach(x => {
+	console.log(x * 2);
+});
+
+결과
+2
+4
+6
+8
+10
+
+콜백함수는 이미 코드 속에서 자주 사용됨
+forEach함수의 경우 함수 안에 익명의 함수를 넣어서 forEach문을 동작시킴
+
+-콜백함수 사용 원칙-
+*익명의 함수의 사용
+ex)
+let number = [1, 2, 3, 4, 5];
+
+number.forEach(function(x) {
+	console.log(x * 2);
+});
+
+화살표 함수에서 일반 함수로 바꾼 예제
+
+콜백함수는 이름이 없는 '익명의 함수'를 사용
+함수의 내부에서 실행되기 때문에 이름을 붙이지 않아도 됨
+
+*함수의 이름 넘기기
+ex)
+function whatYourName(name, callback) {
+    console.log('name: ', name);
+    callback();
+}
+
+function finishFunc() {
+    console.log('finish function');
+}
+
+whatYourName('miniddo', finishFunc);
+
+결과
+name: miniddo
+finish function
+
+[TIP]
+JavaScript Data Type
+- number, string, boolean, object(function, array, data, regexp), null, undefined
+
+자바스크립트는 null과 undefined타입을 제외하고 모든 것을 객체로 다룸
+함수를 변수나 다른 함수의 변수처럼 사용할 수 있음
+함수를 콜백함수로 사용할 경우, 함수의 이름만 넘겨주면 됨
+함수를 인자로 사용할 때 callback, finishFunc처럼 ()를 붙일 필요가 없다는 것
+
+*전역변수, 지역변수 콜백함수의 파라미터로 전달 가능
+• 전역변수: 함수 외부에서 선언되는 변수
+• 지역변수: 함수 내부에서 선언되는 변수
+ex)
+let fruit = 'apple';	// Global Variable
+
+function callbackFunc(callback) {
+    let vegetable = 'tomato';	// Local Variable
+    callback(vegetable);
+}
+
+function eat(vegetable) {
+    console.log(`fruit: ${fruit} / vegetable: ${vegetable}`);
+}
+
+callbackFunc(eat);
+
+결과
+fruit: apple / vegetable: tomato
+
+-콜백함수 주의할 점-
+*this를 사용한 콜백함수
+ex)
+let userData = {
+    signUp: '2020-10-06 15:00:00',
+    id: 'minidoo',
+    name: 'Not Set',
+    setName: function(firstName, lastName) {
+        this.name = firstName + ' ' + lastName;
+    }
+}
+
+function getUserName(firstName, lastName, callback) {
+    callback(firstName, lastName);
+}
+
+getUserName('PARK', 'MINIDDO', userData.setName);
+
+console.log('1: ', userData.name);
+console.log('2: ', window.name);
+
+결과
+1: Not Set
+2: PARK MINIDDO
+
+첫번째 콘솔의 값이 setName()함수가 실행되기 전의 name값이 나오는 것인데, 이는 getUserName()이 전역 함수이기 때문임
+
+즉, setName()에서 사용된 this객체가 window라는 글로벌 객체를 가리킨다. 
+따라서 this를 보호할 수 있도록 콜백함수를 만들어야 함
+
+해결방안: call()과 apply()를 사용하여 this를 보홋할 수 있음
+• call(): 첫번째 인자로 this객체 사용, 나머지 인자들은 , 로 구분
+• apply(): 첫번째 인자로 this객체 사용, 나머지 인자들은 배열 형태로 전달
+
+ex)
+function getUserName(firstName, lastName, callback, obj) {
+    callback.call(obj, firstName, lastName);	- (1)
+}
+
+getUserName('PARK', 'MINIDDO', userData.setName, userData);	- (2)
+
+console.log(userData.name);
+
+결과 
+PARK MINIDDO
+
+(2)에서 마지막 인자에 담긴 userData는 (1)에서 call함수의 첫번째 인자로 전달됨
+즉, call()에 의해서 userData에 this객체가 매핑됨
+
+apply()도 인자를 배열로 전달한다는 점만 다르고 동일하게 작동
+
+ex)
+function getUserName(firstName, lastName, callback, obj) {
+    callback.apply(obj, [firstName, lastName]);
+}
+
+getUserName('PARK', 'MINIDDO', userData.setName, userData);
+
+console.log(userData.name);
+
+결과
+PARK MINIDDO
+
+-콜백지옥-
+비동기 호출이 자주 일어나는 프로그램의 경우 '콜백 지옥'이 발생
+함수의 매개변수로 넘겨지는 콜백함수가 반복되어 코드의 들여쓰기 수준이 감당하기 힘들어질 정도로 깊어지는 현상
+ex)
+function add(x, callback) {
+    let sum = x + x;
+    console.log(sum);
+    callback(sum);
+}
+
+add(2, function(result) {
+    add(result, function(result) {
+        add(result, function(result) {
+            console.log('finish!!');
+        })
+    })
+})
+
+결과
+4
+8
+16
+finish!!
+
+*해결방안: Promise를 사용하여 콜백지옥을 탈출할 수 있음
+
+ex)
+function add(x) {
+    return new Promise((resolve, reject) => {
+        let sum = x + x;
+        console.log(sum);
+        resolve(sum);
+    })
+}
+
+add(2).then(result => {
+    add(result).then(result => {
+        add(result).then(result => {
+            console.log('finish!!');
+        })
+    })
+})
+
+결과 
+4 
+8
+16
+finish!!
+
+Promise는 정산 수행 후 resolve, 실패후 reject가 실행
+callback을 사용했던 것과 마찬가지로 resolve에 값을 담아 전달
+
+*해결방안: Promise의 return을 사용하여 Promise Hell을 탈출할 수 있음
+
+Promise를 사용하면 비동기 메서드에서 마치 동기 메서드처럼 값을 반환할수 있음
+최종 결과를 반환하지는 않고, 대신 Promise를 반환해서 미래의 어떤 시점에 결과를 제공함
+
+MDN에서 정의하고 있는 Promise에 대한 설명
+Promise는 비동기 호출 시, 동기 호출처럼 값을 반환할 수 있음
+resolve를 통해 전달 받은 값을 반환하여 사용해야 함
+
+ex)
+function add(x) {
+    return new Promise((resolve, reject) => {
+        let sum = x + x;
+        console.log(sum);
+        resolve(sum);
+    })
+}
+
+add(2).then(result => {
+    return add(result);
+}).then(result => {
+    return add(result);
+}).then(result => {
+    console.log('finish!!');
+})
+
+결과
+4
+8
+16
+finish!!
