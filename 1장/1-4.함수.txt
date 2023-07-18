@@ -1,0 +1,60 @@
+함수는 특정 코드를 하나의 명령으로 실행 할 수 있게 해주는 기능임
+특정 값들의 합을 구하고 싶을 때는 
+const a = 1;
+const b = 2;
+const sum = a + b;
+로 코드를 작성하면 됨
+
+위 코드를 함수로 작성하면
+function add(a, b){
+	return a+b;
+}
+
+const sum = add(1, 2);
+console.log(sum);
+
+결과는 3
+
+함수를 만들때는 function 키워드를 사용하며, 함수에서 어떤 값을 받아올지 정해주는데 이를 파라미터(매개 변수)라고 부름
+
+함수 내부에서 return키워드를 사용하여 함수의 결과물을 지정 할 수 있음
+
+return을 하게 되면 함수가 끝남 
+
+ex)
+function add(a, b){
+	return a+b;
+	console.log('호출이 되지 않는 코드!');
+}
+
+const sum = add(1, 2);
+console.log(sum);
+
+위 코드를 실행하면 return아래의 코드는 호출되지 않아 결과가 3만 출력되게 됨
+
+console.log를 하게 될때 문자열을 조합하기 위해서 +연산자를 사용
+문자열을 조합 할 때 +를 사용해도 큰 문제는 없지만, 더욱 편하게 조합을 하는 방법임, ES6의 템플릿 리터럴이라는 문법을 사용하는 것
+
+ex)
+function hello(name){
+	console.log('Hello, ${name}!');
+}
+
+hello('velopert');
+
+-화살표 함수-
+함수를 선언하는 방식중 하나인 화살표 함수 문법을 사용하는 것
+ex)
+const add = (a, b) => {
+		return a+b;
+};
+
+console.log(add(1, 2));
+
+function키워드 대신에 =>문자를 사용해서 함수를 구현했는데, 화살표의 좌측에는 함수의 파라미터, 우측에는 코드블록이 들어옴
+코드 블록 내부에서 바로 return을 하는 경우는 
+ex)
+const add = (a, b) => a+b;
+console.log(add(1, 2));
+
+화살표 함수와 일반 funtion으로 만든 함수와의 주요 차이점은 화살표 함수에서 가르키는 this와 function에서 가르키는 this가 서로 다르다는 것
