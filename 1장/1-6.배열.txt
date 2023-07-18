@@ -1,0 +1,56 @@
+객체는 한 변수 혹은 상수에 여러가지 정보를 담기 위함이였다면, 배열은 여러개의 항목들이 들어있는 리스트와 같음
+
+ex)
+const array = [1, 3, 3, 4, 5];
+배열을 선언 할 때에는 이렇게 [ ] 안에 감싸주면 됨
+
+배열안에는 어떤 값이던지 넣을 수 있음
+
+ex)
+const objects = [{name: '멍멍이'}, {name: '야옹이'}];
+
+배열을 선언하고 나서, n번째 index를 조회하고 싶을 땐 
+objects[n];
+
+ex)
+const objects = [{name: '멍멍이'}, {name: '야옹이'}];
+
+console.log(objects);
+console.log(objects[0]);
+console.log(objects[1]);
+
+*주의할 점
+첫번째 index는 objects[0]
+두번째 index는 objects[1]
+
+-배열에 새 항목 추가하기-
+배열에 새로운 항목을 추가 할 때에는 배열이 지니고 있는 내장 함수인 push함수를 사용
+
+ex)
+const objects = [{name: 'dog'}, {name: 'cat'}];
+
+objects.push({
+	name: 'dogs'
+});
+
+console.log(objects);
+
+첫번째 index는 dog
+두번째 index는 cat
+세번째 index는 dogs
+
+-배열의 크기 알아내기-
+배열의 크기를 알아낼 때에는 배열의 length값을 확인
+
+ex)
+const objects = [{name: 'dog'}, {name: 'cat'}];	//length가 2
+
+console.log(objects.length);
+
+objects.push({
+	name: 'dogs'
+});
+
+console.log(objects.length);	//push이후에는 length가 3
+
+ 
