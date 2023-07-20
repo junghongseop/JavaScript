@@ -1,0 +1,46 @@
+function calculateCircleArea(r) {
+	return Math.PI * r * r;
+}
+
+const area = calculateCircleArea(4);
+console.log(area);	//50.26548245743669출력
+
+Math.PI는 원주율 파이의 값을 가르킴
+
+r값을 넣지 않았을 때
+function calculateCircleArea(r) {
+	return Math.PI * r * r;
+}
+
+const area = calculateCircleArea();
+console.log(area);	//NaN
+
+결과는 NaN이 나옴
+Not a Number라는 의미
+숫자가 아닌 값에 곱셈을 하니까 이상한 결과물이 나와버림
+
+함수에서 r값이 주어지지 않으면 기본 값을 1을 사용하도록 설정
+
+ES5에서
+function calculateCircleArea(r) {
+	const radius = r || 1;
+	return Math.PI * radius * radius;
+}
+
+const area = calculateCircleArea();
+console.log(area);	//3.141592653589793
+
+ES6에서
+function calculateCircleArea( r =  1) {
+	return Math.PI * r * r;
+}
+
+const area = calculateCircleArea();
+console.log(area);	//3.141592653589793
+
+화살표 힘수를 사용해서
+const calculateCircleArea = (r = 1) => Math.PI * r * r;
+
+const area calculateCircleArea();
+console.log(area);	//3.141592653589793
+
