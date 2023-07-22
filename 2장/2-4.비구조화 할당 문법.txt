@@ -1,0 +1,176 @@
+변수 혹은 상수로 선언해서 비구조화 할당
+const object = {a: 1, b:2};
+
+const {a, b} = object;
+
+console.log(a);
+console.log(b);
+
+함수의 파라미터에서 비구조화 할당
+const object = {a: 1, b: 2};
+
+function print({a,b}){
+	console.log(a);
+	console.log(b);
+}
+
+print(object);
+
+//1
+//2
+
+b가 없다면 undefined가 출력됨
+
+-비구조화 할당시 기본값 설정-
+b값에 기본값을 주고 싶을 때
+const object  = { a:1 };
+
+function print({ a, b = 2 }){
+	console.log(a);
+	console.log(b);
+}
+
+print(object);
+//1
+//2
+
+다른 예시
+const object = {a:1};
+
+const {a, b = 2 } = object;
+
+console.log(a);//1
+console.log(b);//2
+
+-비구조화 할당시 이름 바꾸기-
+ex)
+const animal = {
+	name: '멍멍이',
+	type: '개'
+};
+
+const nickname = animal.name;
+
+console.log(nickname);	//멍멍이
+
+animal.name값을 nickname값에 담고 있음
+이름이 같다면 비구조화 할당을 쓰면 되는데 지금은 이름이 서로 다름
+이럴때는  :문자를 사용해서 이름을 바꿔줄 수 있음
+
+ex)
+const  animal = {
+	name: '멍멍이',
+	type: '개'
+};
+
+const {name:nickname} = animal
+console.log(nickname);	//멍멍이
+
+'animal 객체 안에 있는 name을 nickname이라고 선언하겠다'라는 의미
+
+-배열 비구조화 할당-
+비구조화 할당은 객체에만 할 수 있는 것이 아님
+배열에서도 할 수 있음
+
+ex)
+const array = [1, 2];
+const [one, two] = array;
+
+console.log(one);	//1
+console.log(two);	//2
+
+배열 안에 원소를 다른 이름으로 새로 선언해주고 싶을 때 사용하면 매우 유용
+
+객체 비구조화 할당과 같이 기본값 지정이 가능
+const array = [1];
+const [one, two = 2] = array;
+
+console.log(one);	//1
+console.log(two);	//2
+
+-깊은 값 비구조화 할당-
+ex)
+const deepObject = {
+	state: {
+		information: {
+			name: 'velopert',
+			languages: ['korean', 'english', 'chinese']
+
+		}
+	};
+	value: 5
+};
+
+name, languages, value값들을 밖으로 꺼내주고 싶다면
+1. 비구조화 할당 문법을 두번 사용하는 것
+2.한번에 모두 추출하는 방법
+
+비구조화 할당 문법을 두번 사용하는 것
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
+};
+
+const { name, languages } = deepObject.state.information;
+const { value } = deepObject;
+
+const extracted = {
+  name,
+  languages,
+  value
+};
+
+console.log(extracted); // {name: "velopert", languages: Array[3], value: 5}
+
+extractd객체를 선언할 때
+const extracted = {
+	name, 
+	languages,
+	value
+}
+
+↓
+
+const extracted = {
+	name: name,
+	languages: languages,
+	value: value
+}
+
+key이름으로 선언된 값이 존재 = 매칭시켜주는 문법
+object-shorthand문법이라고 부름
+
+한번에 모두 추출하는 방법
+const deepObject = {
+  state: {
+    information: {
+      name: 'velopert',
+      languages: ['korean', 'english', 'chinese']
+    }
+  },
+  value: 5
+};
+
+const {
+  state: {
+    information: { name, languages }
+  },
+  value
+} = deepObject;
+
+const extracted = {
+  name,
+  languages,
+  value
+};
+
+console.log(extracted);
+
+깊숙히 들어있는 값도 객체에서 바로 추출 할 수 있음
+
+
