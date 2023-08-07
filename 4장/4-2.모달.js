@@ -1,5 +1,4 @@
 //display: none; 스타일을 사용하게 되면 해당 엘리먼트는 화면에서 숨겨짐
-import "/style.css";
 
 const open = document.getElementById("open");
 const close = document.getElementById("close");
